@@ -1,7 +1,5 @@
 
 export interface Slug<T = string> {
-    location: string;
-    language: LanguageEnum;
     heading: string;
     body: T;
 }
@@ -9,6 +7,12 @@ export interface Slug<T = string> {
 export enum LanguageEnum {
     ENG = 'ENG',
     SP = 'SP'
+}
+
+export interface CustomFrontResponse<T> {
+    payload: T;
+    version: LanguageEnum;
+    location: string;
 }
 
 export interface ListBlock extends Slug<string[]>{
@@ -61,6 +65,13 @@ export interface ClassStartEnd {
     writtentest?: Date | string
 }
 
+export interface SimplePage {
+    location: string;
+    language: LanguageEnum;
+    body: string;
+}
+
+export type LangFetch = {language: LanguageEnum, location: LanguageEnum}
 export interface WebDataObject {
     slug: Slug;
     blurb: ListBlock | null;
@@ -68,7 +79,7 @@ export interface WebDataObject {
     classSE: ClassStartEnd[];
     eployees: Employee[];
     locationAddresses: Address[];
-    detailsPage: string;
-    schedulePage: string;
+    detailsPage: SimplePage;
+    schedulePage: SimplePage;
     faqs: Slug[];
 }

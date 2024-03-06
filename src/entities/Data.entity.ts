@@ -1,3 +1,4 @@
+import { Address, ClassStartEnd, Employee, LanguageEnum, ListBlock, ScheduleEN, ScheduleSP, SimplePage, Slug } from "src/types";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { SimpleColumnType } from "typeorm/driver/types/ColumnTypes";
 
@@ -7,30 +8,36 @@ export class Data {
   @PrimaryGeneratedColumn()
   id: number;
   
-  @Column()
-  slug: SimpleColumnType;
+  @Column({nullable: false})
+  location: string;
 
-  @Column()
-  schedule: SimpleColumnType;
+  @Column({nullable: false})
+  language: LanguageEnum;
+  
+  @Column({type: 'json', nullable: true})
+  slug: Slug;
 
-  @Column()
-  classSE: SimpleColumnType;
+  @Column({type: 'json', nullable: true})
+  schedule: ScheduleEN | ScheduleSP;
 
-  @Column()
-  employees: SimpleColumnType;
+  @Column({type: 'json', nullable: true})
+  classSE: ClassStartEnd;
 
-  @Column()
-  locationAddresses: SimpleColumnType;
+  @Column({type: 'json'})
+  employees: Employee[];
 
-  @Column()
-  detailsPage: string;
+  @Column({type: 'json', nullable: true})
+  locationAddresses: Address;
 
-  @Column()
-  schedulePage: string;
+  @Column({type: 'json', nullable: true})
+  detailsPage: SimplePage;
 
-  @Column()
-  faqs: SimpleColumnType;
+  @Column({type: 'json', nullable: true})
+  schedulePage: SimplePage;
 
-  @Column()
-  missionStatement: SimpleColumnType;
+  @Column({type: 'json'})
+  faqs: Slug[];
+
+  @Column({type: 'json'})
+  missionStatement: ListBlock;
 }
