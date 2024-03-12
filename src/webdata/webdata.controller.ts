@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query, Res } from '@nestjs/common';
 import { WebdataService } from './webdata.service';
-import { CustomResponse, Responder } from 'src/utils';
+import testSlugs, { CustomResponse, Responder, SAMPLE_SLUGS } from 'src/utils';
 import { CustomFrontResponse, LangFetch, LanguageEnum, Slug, WebDataObject } from 'src/types';
 import { Data } from 'src/entities/Data.entity';
 
@@ -62,6 +62,23 @@ export class WebdataController {
     async setSlug(@Body() body: CustomFrontResponse<Slug> ): Promise<CustomResponse<any | null>> {
         try {
             const data = await this.webDataService.addSlug(body);
+        return new Responder({
+            payload: data,
+            code: 200,
+            message: 'Successful request for web object'
+        }).success();
+        } catch (error) {
+        return new Responder({
+            payload: null,
+            code: 400,
+            error,
+        }).failure();
+        }
+    }
+    @Get('/faqs')
+    async getFaqs(@Body() body: CustomFrontResponse<Slug> ): Promise<CustomResponse<any | null>> {
+        try {
+            const data = SAMPLE_SLUGS;
         return new Responder({
             payload: data,
             code: 200,

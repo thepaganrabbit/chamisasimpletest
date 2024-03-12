@@ -2,6 +2,7 @@
 export interface Slug<T = string> {
     heading: string;
     body: T;
+    locationId?: string;
 }
 
 export enum LanguageEnum {
