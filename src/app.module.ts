@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import Configuration from './config';
 import { Data } from './entities/Data.entity';
 import { WebdataModule } from './webdata/webdata.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -18,6 +20,9 @@ import { WebdataModule } from './webdata/webdata.module';
       database: 'db/sql',
       synchronize: true,
       entities: [Data],
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../build'),
     }),
     WebdataModule,
   ],
